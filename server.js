@@ -70,14 +70,18 @@ app.delete('/employees/:id', (req, res) => {
 });
 
 //Add yo Employeeee
-// app.post('/employee'). (req, res) => {
-//     let emp = req.body;
-//     let sql = 'SET @EmpId = ?;SET @Name = ?;SET @EmpCode = ?;SET @Salary = ?; \
-//     CALL EmplyeeAddorEdit(@EmpID,@name,@EmpCode,@Salary);';
-//     mysqlConnection.query(
-//         sql,[emp.EmpID,]
-//     )
-// }
+app.post('/employees'), (req, res) => {
+    let emp = req.body;
+    let sql = 'SET @EmpId = ?;SET @Name = ?;SET @EmpCode = ?;SET @Salary = ?; \
+    CALL EmplyeeAddorEdit(@EmpID,@name,@EmpCode,@Salary);';
+    mysqlConnection.query(
+        sql,[emp.EmpID, emp.Name, emp.EmpCode, emp.Salary],
+        (err, rows, field) => {
+            if (!err) res.send(rows)
+            else console.log(err)
+        }
+    )
+}
 
 
 
